@@ -1,0 +1,1 @@
+this is the text file use for testing reading file in go

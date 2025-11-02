@@ -1,0 +1,2 @@
+Original Content is this is the text file use for testing reading file in go
+and Copied Conetnet is this is the text file use for testing reading file in gothis is the text file use for testing reading file in go
