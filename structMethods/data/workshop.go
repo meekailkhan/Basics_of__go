@@ -15,3 +15,7 @@ func NewWorkShop(name string, instructor Instuctor) WorkShop {
 	w.Course.Instuctor.FirstName = w.Instuctor.FirstName
 	return w
 }
+
+func (c WorkShop) Signup() bool {
+	return true
+}
