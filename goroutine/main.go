@@ -5,16 +5,26 @@ import (
 	"time"
 )
 
-func printMsg(text string, t float64) {
+func printMsg(text string, t float64, channel chan string) {
 	for i := 0; i < 5; i++ {
 		fmt.Printf("%v, %v\n", text, i)
 		time.Sleep(time.Duration(t) * time.Millisecond)
 	}
+	channel <- "Done"
+	channel <- "Complete"
 }
 
 func main() {
-	go printMsg("Go Is Amazing", 10000)
-	// go printMsg("Bye Bye!")
-	printMsg("Rust is Less Popular Then Go", 2000)
+	channel := make(chan string, 2)
+	go printMsg("Go Is Amazing", 1000, channel)
+
+	fmt.Println("========start waiting for channel=========")
+	response := <-channel
+	anotherRes := <-channel
+	fmt.Println("========end waiting for channel==========")
+
+	fmt.Println("response is comming with", response)
+	fmt.Println("another response is", anotherRes)
+	fmt.Println("========end file execution==========")
 
 }
