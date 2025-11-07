@@ -7,6 +7,6 @@ import (
 )
 
 func main() {
-	rate, err := api.GetRate("BTC")
+	rate, err := api.GetRate("2")
 	fmt.Println(rate, err)
 }

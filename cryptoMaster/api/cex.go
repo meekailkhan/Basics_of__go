@@ -1,6 +1,7 @@
 package api
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
@@ -8,28 +9,33 @@ import (
 	"cryptomaster.com/begin/datatypes"
 )
 
-var apiUrl = "https://jsonplaceholder.typicode.com/todos/1"
+var apiUrl = "https://jsonplaceholder.typicode.com/todos/%v"
 
-func GetRate(currency string) (*datatypes.Rate, error) {
+func GetRate(userId string) (*datatypes.UserResponse, error) {
 	// upCurrency := strings.ToUpper(currency)
-	res, err := http.Get(apiUrl)
+	fetchUrl := fmt.Sprintf(apiUrl, userId)
+	res, err := http.Get(fetchUrl)
 
 	if err != nil {
 		return nil, err
 	}
-
+	var respose datatypes.UserResponse
 	if res.StatusCode == http.StatusOK {
 		bodyBytes, err := io.ReadAll(res.Body)
 		if err != nil {
 			return nil, err
 		}
-		json := string(bodyBytes)
-		fmt.Println(json)
+		err = json.Unmarshal(bodyBytes, &respose)
+		if err != nil {
+			return nil, err
+		}
+		// fmt.Println(respose)
+
 	} else {
 		return nil, fmt.Errorf("status code is : %v", res.StatusCode)
 	}
 
-	rate := datatypes.Rate{Currency: currency, Price: 20}
+	// rate := datatypes.Rate{}
 
-	return &rate, nil
+	return &respose, nil
 }
