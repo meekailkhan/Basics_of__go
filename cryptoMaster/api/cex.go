@@ -35,7 +35,7 @@ func GetRate(userId string) (*datatypes.UserResponse, error) {
 		return nil, fmt.Errorf("status code is : %v", res.StatusCode)
 	}
 
-	// rate := datatypes.Rate{}
+	// fmt.Println(&respose)
 
 	return &respose, nil
 }

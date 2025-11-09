@@ -1,3 +1,3 @@
 module cryptomaster.com/begin
 
-go 1.24.9
+go 1.20.9
