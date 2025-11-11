@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"text/template"
 
+	"meuseum.com/begin/api"
 	"meuseum.com/begin/data"
 )
 
@@ -15,7 +16,7 @@ func handleTamplate(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("Internal Server error"))
 		return
 	}
-	output.Execute(w, data.GetAllList()[1])
+	output.Execute(w, data.GetAllList())
 }
 
 func main() {
@@ -28,6 +29,7 @@ func main() {
 	fs := http.FileServer(http.Dir("./public"))
 
 	server.Handle("/", fs)
+	server.HandleFunc("/api/exhibition", api.Get)
 	server.HandleFunc("/tamplate", handleTamplate)
 	// server2.HandleFunc("/hello2", func(w http.ResponseWriter, r *http.Request) {
 	// 	w.Write([]byte(`<h1 style="color:red">Hello world from go server</h1>`))

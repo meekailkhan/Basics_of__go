@@ -22,12 +22,14 @@
     <h1><img src="images/logo.png" alt="Frontend Masters Museum" width="300"
             fetchpriority="high"></h1>
     <main>
-        <article>
+        {{ range . }}
+        <article style="border-top: 10px solid {{ .Color }};" class="{{if .CurrentlyOpen }} open {{ else }} close {{ end }}">
             <h2>{{ .Title }}</h2>
             <p>{{ .Description }}</p>
             <img src="gallery/{{ .Image }}"
                     fetchpriority="high" decoding="sync">
         </article>
+        {{ end }}
     </main>
 </body>
 </html>
