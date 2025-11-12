@@ -42,3 +42,7 @@ var list = []Exhibition{
 func GetAllList() []Exhibition {
 	return list
 }
+
+func Add(exhibition Exhibition) {
+	list = append(list, exhibition)
+}
